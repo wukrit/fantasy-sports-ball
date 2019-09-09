@@ -1,0 +1,13 @@
+<h1> <%= @user.username %>'s Profile </h1>
+<p> Bio: <%= @user.bio %> </p>
+<p> Age: <%= @user.age %></p>
+<p> Gender: <%= @user.gender %></p>
+<p> Location: <%= @user.location %></p>
+<p> Rosters: </p>
+<ul>
+  <% @user.rosters.each do |roster| %>
+    <li>
+      <%= link_to roster.name, roster %>
+    </li>
+  <% end %>
+</ul>

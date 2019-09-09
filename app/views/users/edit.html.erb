@@ -1,0 +1,21 @@
+<h1>Edit <%= @user.username %>'s Profile </h1>
+
+<%= render "errors" %>
+
+<%= form_for @user do |f| %>
+  <%= f.hidden_field :username, value: @user.username %>
+
+  <%= f.label :location %> <br>
+  <%= f.text_field :location %>
+  <br>
+  <%= f.label :age %> <br>
+  <%= f.number_field :age %>
+  <br>
+  <%= f.label :gender %> <br>
+  <%= f.text_field :gender %>
+  <br>
+  <%= f.label :bio %> <br>
+  <%= f.text_area :bio %>
+  <br>
+  <%= f.submit %>
+<% end %>
