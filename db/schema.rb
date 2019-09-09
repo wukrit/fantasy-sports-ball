@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 5) do
+ActiveRecord::Schema.define(version: 6) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,14 @@ ActiveRecord::Schema.define(version: 5) do
     t.string "api_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name"
+    t.string "position"
+    t.string "team"
+    t.date "dob"
+    t.string "height"
+    t.integer "weight"
+    t.string "college"
+    t.integer "jersey"
   end
 
   create_table "roster_players", force: :cascade do |t|
