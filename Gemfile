@@ -25,7 +25,10 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 gem 'rest-client'
+<<<<<<< HEAD
 gem 'json'
+=======
+>>>>>>> 2e97301172cb911c14cfbff2c2b8e20f7b006802
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
