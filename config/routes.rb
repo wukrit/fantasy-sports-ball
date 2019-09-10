@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  get '/players/clear', to: 'players#clear', as: 'clear'
+
   resources :teams, only: [:index, :show]
   resources :players, only: [:index, :show]
   resources :rosters, except: [:index]
