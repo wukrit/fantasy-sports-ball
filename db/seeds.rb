@@ -5,20 +5,23 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-players_json = RestClient.get("https://www.fantasyfootballnerd.com/service/players/json/test")
-teams_json = RestClient.get("https://www.fantasyfootballnerd.com/service/nfl-teams/json/test")
+
+Player.destroy_all
+Team.destroy_all
+
+# players_json = RestClient.get("https://www.fantasyfootballnerd.com/service/players/json/test")
+# teams_json = RestClient.get("https://www.fantasyfootballnerd.com/service/nfl-teams/json/test")
 
 # TEST API KEYS ^^
 # LIVE API KEYS VV
-# players_json = RestClient.get("https://www.fantasyfootballnerd.com/service/players/json/5m35cuhe6n3t")
-# teams_json = RestClient.got("https://www.fantasyfootballnerd.com/service/nfl-teams/json/5m35cuhe6n3t")
+players_json = RestClient.get("https://www.fantasyfootballnerd.com/service/players/json/5m35cuhe6n3t")
+teams_json = RestClient.get("https://www.fantasyfootballnerd.com/service/nfl-teams/json/5m35cuhe6n3t")
 
 
 players_array = JSON.parse(players_json)["Players"]
 teams_array = JSON.parse(teams_json)["NFLTeams"]
 
-Player.destroy_all
-Team.destroy_all
+
 
 players_array.each do |player|
   if !Player.where(api_id: player["playerId"]).exists? && player["active"] == "1"
@@ -44,7 +47,5 @@ teams_array.each do |team|
     code: team["code"]
   )
 end
-
-byebug
 
 1
