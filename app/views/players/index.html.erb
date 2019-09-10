@@ -9,13 +9,24 @@
 <form action="/players" method="GET">
   <label for="filter">Filter Options</label>
   <select id="filter" name="filter">
-    <option value="position">Filter by Position</option>
-    <option value="team">Filter by Team</option>
+    <option value="position" <%= "selected" if params[:filter] == "position" %>>Filter by Position</option>
+    <option value="team" <%= "selected" if params[:filter] == "team" %>>Filter by Team</option>
   </select>
   <% if params[:filter] == "position" %>
-    position
+    <select name="filter_option">
+      <option value="QB">Quarterbacks</option>
+      <option value="RB">Running Backs</option>
+      <option value="WR">Wide Recievers</option>
+      <option value="TE">Tight Ends</option>
+      <option value="K">Kickers</option>
+      <option value="DEF">Defenses</option>
+    </select>
   <% elsif params[:filter] == "team" %>
-    team
+    <select name="filter_option">
+      <% Team.alphabetical.each do |team| %>
+        <option value="<%= team.code %>"><%= team.name %></option>
+      <% end %>
+    </select>
   <% end %>
 
   <input type="submit" value="Submit">
@@ -29,7 +40,7 @@
   <ul>
     <% @players.where(team: team.code).each do |player| %>
       <li>
-        <%= link_to "#{player.name} | #{player.position} | #{player.team}", player %>
+        <%= link_to "#{player.name} | #{player.position}", player %>
       </li>
     <% end %>
   </ul>
