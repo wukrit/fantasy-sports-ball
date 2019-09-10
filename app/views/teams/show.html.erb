@@ -1,0 +1,10 @@
+<h1> <%= @team.name %> </h1>
+
+<h2> Roster </h2>
+<ul>
+  <% @team.find_players.each do |player| %>
+    <li>
+      <%= link_to player.name, player %>
+    </li>
+  <% end %>
+</ul>
