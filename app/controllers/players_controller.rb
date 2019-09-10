@@ -7,9 +7,6 @@ class PlayersController < ApplicationController
 
     if params[:search_name]
       @players = Player.where("name LIKE ?", "%#{params[:search_name].titleize}%")
-      # @teams = @teams.select do |team|
-      #   @players.pluck(:team).include?(team.code)
-      # end
       @teams = @teams.where(code: @players.pluck(:team))
     else
       @players = Player.all
@@ -20,9 +17,7 @@ class PlayersController < ApplicationController
         @players = @players.where(position: params[:filter_option])
       else
         @teams = Team.alphabetical
-        @teams = @teams.select do |team|
-          team.code == params[:filter_option]
-        end
+        @teams = @teams.where(code: params[:filter_option])
       end
     end
 
