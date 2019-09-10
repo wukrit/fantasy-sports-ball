@@ -1,6 +1,8 @@
 class PlayersController < ApplicationController
 
   def index
+    # Use cookie to store filter and search data until user clears it
+
     @teams = Team.alphabetical
 
     if params[:search_name]
