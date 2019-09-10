@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_secure_password
   has_many :rosters, dependent: :destroy
 
   validates :username, uniqueness: true

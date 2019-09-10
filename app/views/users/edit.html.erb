@@ -3,8 +3,6 @@
 <%= render "errors" %>
 
 <%= form_for @user do |f| %>
-  <%= f.hidden_field :username, value: @user.username %>
-
   <%= f.label :location %> <br>
   <%= f.text_field :location %>
   <br>
