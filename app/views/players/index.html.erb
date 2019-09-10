@@ -1,13 +1,35 @@
 <h1>NFL Players</h1>
 
+<form action="/players" method="GET">
+  <input type="text" name="search_name" >
+  <input type="submit" value="Search for Player">
+</form>
+<br>
+
+<form action="/players" method="GET">
+  <label for="filter">Filter Options</label>
+  <select id="filter" name="filter">
+    <option value="position">Filter by Position</option>
+    <option value="team">Filter by Team</option>
+  </select>
+  <% if params[:filter] == "position" %>
+    position
+  <% elsif params[:filter] == "team" %>
+    team
+  <% end %>
+
+  <input type="submit" value="Submit">
+</form>
+
+
 <% @teams.each do |team| %>
   <h2>
     <%= team.name %>
   </h2>
   <ul>
-    <% team.find_players.each do |player| %>
+    <% @players.where(team: team.code).each do |player| %>
       <li>
-        <%= link_to "#{player.name} | #{player.team}", player %>
+        <%= link_to "#{player.name} | #{player.position} | #{player.team}", player %>
       </li>
     <% end %>
   </ul>
