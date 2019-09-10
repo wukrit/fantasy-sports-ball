@@ -4,9 +4,9 @@ Rails.application.routes.draw do
   resources :rosters, except: [:index]
   resources :users
 
-  get '/login', to: 'login#form', as: 'login_path'
-  post '/login', to: 'login#auth', as: 'login_auth_path'
-  get '/logout', to: 'login#logout', as: 'logout_path'
+  get '/login', to: 'login#form', as: 'login'
+  post '/login', to: 'login#auth', as: 'login_auth'
+  get '/logout', to: 'login#logout', as: 'logout'
 
   root "static#home"
 

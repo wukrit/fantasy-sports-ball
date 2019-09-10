@@ -10,13 +10,13 @@ class LoginController < ApplicationController
       redirect_to user
     else
       flash[:errors] = "Invalid Credentials"
-      redirect_to login_path_url
+      redirect_to login_path
     end
   end
 
   def logout
     session[:user_id] = nil
-    redirect_to login_path_url
+    redirect_to login_path
   end
 
 end
