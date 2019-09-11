@@ -1,0 +1,30 @@
+<h1>Create New Roster</h1>
+
+<%= form_for @roster do |f| %>
+
+  <%= f.label :team_name %>
+  <%= f.text_field :team_name %><br>
+
+  <%= f.fields_for :roster_player do |l| %>
+    <%= l.label :QB1, "Starting QB" %>
+    <%= l.collection_select :QB1, @players.where(position: "QB"), :id, :name %>
+  <% end %><br>
+
+  <%= f.fields_for :roster_player do |l| %>
+    <%= l.label :QB2, "Backup QB" %>
+    <%= l.collection_select :QB2, @players.where(position: "QB"), :id, :name %>
+  <% end %><br>
+<!--
+  <%= f.fields_for :roster_player do |l| %>
+    <%= l.label :player_id, "Player Name" %>
+    <%= l.text_field :player_id %>
+  <% end %><br>
+
+  <%= f.fields_for :roster_player do |l| %>
+    <%= l.label :player_id, "Player Name" %>
+    <%= l.text_field :player_id %>
+  <% end %><br><br> -->
+
+  <%= f.submit %>
+
+<% end %>
