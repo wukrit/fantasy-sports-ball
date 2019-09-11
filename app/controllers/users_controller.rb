@@ -27,11 +27,16 @@ class UsersController < ApplicationController
   end
 
   def update
-    if @user.update(user_params(:location, :age, :gender, :bio))
-      redirect_to @user
+    if session[:user_id] == @user.id
+      if @user.update(user_params(:location, :age, :gender, :bio))
+        redirect_to @user
+      else
+        flash[:errors] = @user.errors.full_messages.to_sentence
+        redirect_to edit_user_path
+      end
     else
-      flash[:errors] = @user.errors.full_messages.to_sentence
-      redirect_to edit_user_path
+      flash[:errors] = "You are not authorized to edit this profile."
+      redirect_to @user
     end
   end
 

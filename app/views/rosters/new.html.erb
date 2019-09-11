@@ -1,8 +1,6 @@
 <h1>Create New Roster</h1>
 
-<% if flash[:errors] %>
-  <p><%= flash[:errors] %></p>
-<% end %>
+<%= render "./shared/errors" %>
 
 <%= form_for @roster do |f| %>
 

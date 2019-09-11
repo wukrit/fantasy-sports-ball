@@ -3,3 +3,9 @@
 <% @roster.players.each do |player| %>
   <%= player.name %><br>
 <% end %>
+
+<br><br>
+
+<% if session[:user_id] == @roster.user_id %>
+  <%= button_to "Delete Roster", @roster, method: :delete %>
+<% end %>

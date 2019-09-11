@@ -39,7 +39,8 @@ class RostersController < ApplicationController
   end
 
   def destroy
-
+    @roster.destroy
+    redirect_to User.find(session[:user_id])
   end
 
   private

@@ -1,6 +1,7 @@
 <h1>Edit <%= @user.username %>'s Profile </h1>
 
-<%= render "errors" %>
+<%= render "./shared/errors" %>
+
 
 <%= form_for @user do |f| %>
   <%= f.label :location %> <br>
