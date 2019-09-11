@@ -7,14 +7,23 @@ class RostersController < ApplicationController
   end
 
   def create
-    byebug
-    @roster = Roster.create(team_name: roster_params(:team_name)[:team_name], user_id: session[:user_id])
-    roster_player_params.each do |roster_position, player_id|
-      @player = Player.find(player_id)
-      RosterPlayer.create(roster_id: @roster.id, player_id: @player.id, roster_position: roster_position)
+    if session[:user_id]
+      @roster = Roster.create(team_name: roster_params(:team_name)[:team_name], user_id: session[:user_id])
+      roster_player_params.each do |roster_position, player_id|
+        @player = Player.find(player_id)
+        RosterPlayer.create(roster_id: @roster.id, player_id: @player.id, roster_position: roster_position)
+      end
+      if @roster.roster_players.count != 8
+        @roster.destroy
+        flash[:errors] = "Cannot have duplicate players on a roster."
+        redirect_to new_roster_path
+      else
+        redirect_to @roster.user
+      end
+    else
+      flash[:errors] = "You must be logged in to create a roster."
+      redirect_to new_roster_path
     end
-    byebug
-
   end
 
   def show
