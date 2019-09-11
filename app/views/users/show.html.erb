@@ -1,4 +1,13 @@
 <h1> <%= @user.username %>'s Profile </h1>
+
+<% if session[:user_id] == @user.id %>
+  <%= link_to "Edit Profile", edit_user_path(@user) %>
+<% end %>
+
+<br>
+
+<%= render "./shared/errors" %>
+
 <p> Bio: <%= @user.bio %> </p>
 <p> Age: <%= @user.age %></p>
 <p> Gender: <%= @user.gender %></p>

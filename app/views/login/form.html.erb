@@ -1,6 +1,4 @@
-<% if flash[:errors] %>
-  <p> <%= flash[:errors] %> </p>
-<% end %>
+<%= render "./shared/errors" %>
 
 <%= form_tag login_auth_path do %>
   <ul>
