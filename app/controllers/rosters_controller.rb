@@ -8,8 +8,12 @@ class RostersController < ApplicationController
 
   def create
     byebug
-    @roster = Roster.create(team_name: roster_params(:team_name), user_id: session[:user_id])
-    
+    @roster = Roster.create(team_name: roster_params(:team_name)[:team_name], user_id: session[:user_id])
+    roster_player_params.each do |roster_position, player_id|
+      @player = Player.find(player_id)
+      RosterPlayer.create(roster_id: @roster.id, player_id: @player.id, roster_position: roster_position)
+    end
+    byebug
 
   end
 
@@ -39,4 +43,7 @@ class RostersController < ApplicationController
     params.require(:roster).permit(*args)
   end
 
+  def roster_player_params
+    params.require(:roster).require(:roster_player).permit(:QB1, :RB1, :RB2, :WR1, :WR2, :TE, :DEF, :K)
+  end
 end

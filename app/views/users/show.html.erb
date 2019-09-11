@@ -7,7 +7,7 @@
 <ul>
   <% @user.rosters.each do |roster| %>
     <li>
-      <%= link_to roster.name, roster %>
+      <%= link_to roster.team_name, roster %>
     </li>
   <% end %>
 </ul>
