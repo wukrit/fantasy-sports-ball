@@ -20,7 +20,6 @@ class PlayersController < ApplicationController
         @players = @players.where(position: session[:filter_option])
         @teams = @teams.where(code: @players.pluck(:team))
       else
-        @teams = Team.alphabetical
         @teams = @teams.where(code: session[:filter_option])
       end
     end

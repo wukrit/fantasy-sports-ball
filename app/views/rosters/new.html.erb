@@ -9,8 +9,10 @@
 
   <%= f.fields_for :roster_player do |l| %>
     <%= l.label :QB1, "QB" %>
-    <%= l.collection_select :QB1, @players.where(position: "QB"), :id, :name %>
-  <% end %><br>
+    <%= l.collection_select :QB1, @players.where(position: "QB"), :id, :name, {:selected => session[:roster_positions]["QB1"]} %>
+    <%= link_to "Search for QBs", player_search_path(position_for_roster: "QB1", position_search: "QB") %>
+  <% end %>
+  <br>
 
   <%= f.fields_for :roster_player do |l| %>
     <%= l.label :RB1, "RB" %>
@@ -46,18 +48,6 @@
     <%= l.label :K, "K" %>
     <%= l.collection_select :K, @players.where(position: "K"), :id, :name %>
   <% end %><br><br>
-
-  <!-- (:QB1, :RB1, :RB2, :WR1, :WR2, :TE, :DEF, :K, :B1, :B2, :B3, :B4) -->
-<!--
-  <%= f.fields_for :roster_player do |l| %>
-    <%= l.label :player_id, "Player Name" %>
-    <%= l.text_field :player_id %>
-  <% end %><br>
-
-  <%= f.fields_for :roster_player do |l| %>
-    <%= l.label :player_id, "Player Name" %>
-    <%= l.text_field :player_id %>
-  <% end %><br><br> -->
 
   <%= f.submit %>
 
