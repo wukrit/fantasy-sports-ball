@@ -2,18 +2,50 @@
 
 <%= form_for @roster do |f| %>
 
-  <%= f.label :team_name %>
-  <%= f.text_field :team_name %><br>
+  <%= f.label :team_name, "Team Name" %>
+  <%= f.text_field :team_name %><br><br>
 
   <%= f.fields_for :roster_player do |l| %>
-    <%= l.label :QB1, "Starting QB" %>
+    <%= l.label :QB1, "QB" %>
     <%= l.collection_select :QB1, @players.where(position: "QB"), :id, :name %>
   <% end %><br>
 
   <%= f.fields_for :roster_player do |l| %>
-    <%= l.label :QB2, "Backup QB" %>
-    <%= l.collection_select :QB2, @players.where(position: "QB"), :id, :name %>
+    <%= l.label :RB1, "RB" %>
+    <%= l.collection_select :RB1, @players.where(position: "RB"), :id, :name %>
   <% end %><br>
+
+  <%= f.fields_for :roster_player do |l| %>
+    <%= l.label :RB2, "RB" %>
+    <%= l.collection_select :RB2, @players.where(position: "RB"), :id, :name %>
+  <% end %><br>
+
+  <%= f.fields_for :roster_player do |l| %>
+    <%= l.label :WR1, "WR" %>
+    <%= l.collection_select :WR1, @players.where(position: "WR"), :id, :name %>
+  <% end %><br>
+
+  <%= f.fields_for :roster_player do |l| %>
+    <%= l.label :WR2, "WR" %>
+    <%= l.collection_select :WR2, @players.where(position: "WR"), :id, :name %>
+  <% end %><br>
+
+  <%= f.fields_for :roster_player do |l| %>
+    <%= l.label :TE, "TE" %>
+    <%= l.collection_select :TE, @players.where(position: "TE"), :id, :name %>
+  <% end %><br>
+
+  <%= f.fields_for :roster_player do |l| %>
+    <%= l.label :DEF, "DEF" %>
+    <%= l.collection_select :DEF, @players.where(position: "DEF"), :id, :name %>
+  <% end %><br>
+
+  <%= f.fields_for :roster_player do |l| %>
+    <%= l.label :K, "K" %>
+    <%= l.collection_select :K, @players.where(position: "K"), :id, :name %>
+  <% end %><br><br>
+
+  <!-- (:QB1, :RB1, :RB2, :WR1, :WR2, :TE, :DEF, :K, :B1, :B2, :B3, :B4) -->
 <!--
   <%= f.fields_for :roster_player do |l| %>
     <%= l.label :player_id, "Player Name" %>
