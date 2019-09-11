@@ -4,6 +4,7 @@ class RostersController < ApplicationController
   def new
     @roster = Roster.new
     @players = Player.all
+    session[:roster_positions] ||= {}
   end
 
   def create
@@ -41,6 +42,41 @@ class RostersController < ApplicationController
   def destroy
     @roster.destroy
     redirect_to User.find(session[:user_id])
+  end
+
+  def player_search
+    session[:position_for_roster] ||= params[:position_for_roster]
+    session[:position_search] ||= params[:position_search]
+    session[:player_search_name] ||= params[:player_search_name]
+    session[:team_filter] ||= params[:team_filter]
+    @teams = Team.alphabetical
+    @players = Player.where(position: session[:position_search])
+    @teams = Team.where(code: @players.pluck(:team))
+
+    if session[:player_search_name]
+      @players = @players.where("name LIKE ?", "%#{session[:player_search_name].titleize}%")
+      @teams = @teams.where(code: @players.pluck(:team))
+    end
+
+    if session[:team_filter]
+      @teams = @teams.where(code: session[:team_filter])
+    end
+
+  end
+
+  def search_clear
+    session[:player_search_name] = nil
+    session[:team_filter] = nil
+    redirect_to player_search_path
+  end
+
+  def add_player
+    session[:roster_positions][session[:position_for_roster]] = params[:player_id]
+    session[:position_for_roster] = nil
+    session[:position_search] = nil
+    session[:player_search_name] = nil
+    session[:team_filter] = nil
+    redirect_to new_roster_path
   end
 
   private
