@@ -13,3 +13,83 @@
  *= require_tree .
  *= require_self
  */
+
+/* SiteWide Font */
+* {
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+
+/* Body Styles */
+body {
+  background-color: #f3f3f3;
+}
+
+/* Main Body Containers */
+.wrapper {
+  background-color: #FFF;
+  width: 60vw;
+  margin-top: -10px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 10px 10px 20px #D3D3D3;
+  border-left: 1px solid #A9A9A9;
+  border-right: 1px solid #A9A9A9;
+  border-bottom: 1px solid #A9A9A9;
+}
+
+.content {
+  padding: 10px 15px 20px 15px;
+}
+
+.content a {
+  text-decoration: none;
+  color: black;
+}
+
+.content a:hover {
+  text-decoration: underline;
+}
+
+/* Navbar Styling */
+.nav {
+  position: fixed;
+  width: inherit;
+}
+
+.nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+.nav li {
+  float: left;
+}
+
+.nav li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.nav .right-nav {
+  float: right;
+}
+
+.nav li a:hover {
+  background-color: #111;
+}
+
+/* Dropdowns */
+select {
+  width: 10vw;
+}
+
+/* Login Form */
+li {
+  list-style: none;
+}

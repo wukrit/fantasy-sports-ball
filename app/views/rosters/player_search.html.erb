@@ -8,14 +8,13 @@
 
 <form action="/rosters/player_search" method="GET">
   <label for="team_filter">Filter By Team</label>
-  <select name="team_filter">
+  <select name="team_filter" onchange="this.form.submit()">
+    <option value="">Sort by Team</option>
     <% @teams.each do |team| %>
       <option value="<%= team.code %>"><%= team.name %></option>
     <% end %>
   </select>
-  <input type="submit" value="Submit">
 </form>
-<br>
 
 <%= link_to "Clear Filter Options", search_clear_path %><br>
 

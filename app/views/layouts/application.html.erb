@@ -6,25 +6,42 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <span>
-      <%= link_to "Players", players_path %> | <%= link_to "Teams", teams_path %> |
-        <% if session[:user_id] %>
-          <%= link_to "Create New Roster", new_roster_path %>
-        <% end %>
-    </span>
-    <span>
-      <% if session[:user_id] %>
-        Currently Logged In: <%= link_to User.find(session[:user_id]).username, User.find(session[:user_id]) %> | <%= link_to "Logout", logout_path %>
-      <% else %>
-        <%= link_to "Login", login_path %> | <%= link_to "Sign Up", new_user_path %>
-      <% end %>
-    </span>
+    <div class="wrapper">
+      <div class="nav">
+        <ul>
+          <li><%= link_to "Players", players_path %></li>
+          <li><%= link_to "Teams", teams_path %></li>
+          <li><% if session[:user_id] %>
+                <%= link_to "Create New Roster", new_roster_path %>
+              <% end %>
+          </li>
 
-    <%= yield %>
-    
+          <% if session[:user_id] %>
+            <li class="right-nav">
+              <%= link_to "Logout", logout_path %>
+            </li>
+            <li class="right-nav">
+              <%= link_to "Currently Logged In: #{User.find(session[:user_id]).username}", User.find(session[:user_id]) %>
+            </li>
+          <% else %>
+            <li class="right-nav">
+              <%= link_to "Login", login_path %>
+            </li>
+            <li class="right-nav">
+              <%= link_to "Sign Up", new_user_path %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      <br>
+      <div class="content">
+        <%= yield %>
+      </div>
+    </div>
   </body>
 </html>
