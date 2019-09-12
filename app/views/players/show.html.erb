@@ -1,11 +1,9 @@
 <h1> <%= @player.name %> | <%= @player.team %> </h1>
 
-<% if session[:position_search] %>
+<% if session[:position_search] && session[:user_id] %>
   <%= link_to "Add to Roster", add_player_path(player_id: @player.id) %><br>
   <%= link_to "Back to  #{session[:position_search]}'s", player_search_path %>
 <% end %>
-
-<br>
 
 <ul>
   <li>
