@@ -15,7 +15,7 @@ class LoginController < ApplicationController
   end
 
   def logout
-    session[:user_id] = nil
+    session.clear
     redirect_to login_path
   end
 
