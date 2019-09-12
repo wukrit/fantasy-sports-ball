@@ -6,7 +6,8 @@ class RostersController < ApplicationController
     @roster = Roster.new
     @players = Player.all
     session[:roster_positions] ||= {}
-    clear_session(:position_for_roster, :position_search, :player_search_name, :team_filter)
+    session[:position_search] ||= nil
+    clear_session(:position_for_roster, :player_search_name, :team_filter)
   end
 
   def create
@@ -49,7 +50,7 @@ class RostersController < ApplicationController
 
   def player_search
     session[:position_for_roster] ||= params[:position_for_roster]
-    session[:position_search] = params[:position_search]
+    session[:position_search] = params[:position_search] if params[:position_search] != nil
     session[:player_search_name] ||= params[:player_search_name]
     session[:team_filter] ||= params[:team_filter]
     @teams = Team.alphabetical
