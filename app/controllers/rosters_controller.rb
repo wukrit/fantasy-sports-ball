@@ -2,9 +2,11 @@ class RostersController < ApplicationController
   before_action :set_roster, only: [:show, :edit, :update, :destroy]
 
   def new
+    # byebug
     @roster = Roster.new
     @players = Player.all
     session[:roster_positions] ||= {}
+    clear_session(:position_for_roster, :position_search, :player_search_name, :team_filter)
   end
 
   def create
@@ -46,13 +48,13 @@ class RostersController < ApplicationController
 
   def player_search
     session[:position_for_roster] ||= params[:position_for_roster]
-    session[:position_search] ||= params[:position_search]
+    session[:position_search] = params[:position_search]
     session[:player_search_name] ||= params[:player_search_name]
     session[:team_filter] ||= params[:team_filter]
     @teams = Team.alphabetical
     @players = Player.where(position: session[:position_search])
     @teams = Team.where(code: @players.pluck(:team))
-
+    # byebug
     if session[:player_search_name]
       @players = @players.where("name LIKE ?", "%#{session[:player_search_name].titleize}%")
       @teams = @teams.where(code: @players.pluck(:team))
@@ -65,17 +67,15 @@ class RostersController < ApplicationController
   end
 
   def search_clear
-    session[:player_search_name] = nil
-    session[:team_filter] = nil
+    clear_session(:player_search_name, :team_filter)
     redirect_to player_search_path
   end
 
   def add_player
+    # byebug
     session[:roster_positions][session[:position_for_roster]] = params[:player_id]
-    session[:position_for_roster] = nil
-    session[:position_search] = nil
-    session[:player_search_name] = nil
-    session[:team_filter] = nil
+    # byebug
+    clear_session(:position_for_roster, :position_search, :player_search_name, :team_filter)
     redirect_to new_roster_path
   end
 
