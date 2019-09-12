@@ -5,8 +5,9 @@ class PlayersController < ApplicationController
 
     @teams = Team.alphabetical
     session[:search_name] ||= params[:search_name]
-    session[:filter] ||= params[:filter]
-    session[:filter_option] ||= params[:filter_option]
+    session[:filter] = params[:filter]
+    params[:filter_option] = nil if params[:filter_option] == ""
+    session[:filter_option] = params[:filter_option]
 
     if session[:search_name]
       @players = Player.where("name LIKE ?", "%#{session[:search_name].titleize}%")
@@ -27,9 +28,7 @@ class PlayersController < ApplicationController
   end
 
   def clear
-    session[:search_name] = nil
-    session[:filter_option] = nil
-    session[:filter] = nil
+    clear_session(:search_name, :filter_name, :filter)
     redirect_to players_path
   end
 
