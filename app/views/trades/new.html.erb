@@ -1,0 +1,11 @@
+<h1>Propose Trade With <%= @opponent_roster.user.username %></h1>
+
+
+<%= form_for @trade do |f| %>
+
+  <%= f.label :received_player, "Player to Receive" %>
+  <%= f.collection_select :received_player, @opponent_roster.for_collection_select, 'second', 'first' %>
+
+  
+
+<% end %>

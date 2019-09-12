@@ -21,6 +21,7 @@ class RostersController < ApplicationController
         flash[:errors] = "Cannot have duplicate players on a roster."
         redirect_to new_roster_path
       else
+        clear_session(:roster_positions)
         redirect_to @roster.user
       end
     else

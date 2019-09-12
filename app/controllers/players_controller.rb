@@ -36,13 +36,11 @@ class PlayersController < ApplicationController
   end
 
   def handle_filters
-    if session[:filter_option]
-      if session[:filter] == "position"
-        @players = @players.where(position: session[:filter_option])
-        @teams = @teams.where(code: @players.pluck(:team))
-      else
-        @teams = @teams.where(code: session[:filter_option])
-      end
+    if session[:filter_option] && session[:filter] == "position"
+      @players = @players.where(position: session[:filter_option])
+      @teams = @teams.where(code: @players.pluck(:team))
+    elsif session[:filter_option] && session[:filter] == "team"
+      @teams = @teams.where(code: session[:filter_option])
     end
   end
 
