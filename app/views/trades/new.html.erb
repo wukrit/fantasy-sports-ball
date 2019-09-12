@@ -3,9 +3,19 @@
 
 <%= form_for @trade do |f| %>
 
-  <%= f.label :received_player, "Player to Receive" %>
-  <%= f.collection_select :received_player, @opponent_roster.for_collection_select, 'second', 'first' %>
+  <%= f.label :received_player_id, "Player to Receive" %> <br>
+  <%= f.collection_select :received_player_id, @opponent_roster.for_collection_select, 'first', 'second', {:selected => session[:received_player_id]} %>
+  <br><br>
 
-  
+  <%= fields_for :roster do |l| %>
+    <%= l.label :selected_roster, "Which Roster Are You Trading From?" %> <br>
+    <%= l.collection_select :selected_roster, @own_rosters, :id, :team_name, {:onchange => "this.form.submit()", :selected => session[:selected_roster]} %>
+  <% end %>
 
+  <% if session[:selected_roster]  %>
+    <%= f.label :given_player_id, "Player to Trade" %><br>
+    <%= f.collection_select :given_player_id, @own_roster.for_collection_select, 'first', 'second', {:session}  %>
+  <% end %>
+  <br>
+  <%= f.submit %>
 <% end %>

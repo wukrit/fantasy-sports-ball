@@ -14,7 +14,7 @@ class Roster < ApplicationRecord
 
   def for_collection_select
     self.roster_players.map do |roster_player|
-      [roster_player.player.name, roster_player.player.id]
+      [roster_player.player.id, roster_player.player.name]
     end
   end
 
