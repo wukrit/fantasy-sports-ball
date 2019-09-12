@@ -12,4 +12,6 @@
 
 <% if session[:user_id] == @roster.user_id %>
   <%= button_to "Delete Roster", @roster, method: :delete %>
+<% elsif session[:user_id] %>
+  <%= link_to "Propose Trade", new_trade_path(roster_id: @roster.id) %>
 <% end %>

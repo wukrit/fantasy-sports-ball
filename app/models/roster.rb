@@ -12,5 +12,11 @@ class Roster < ApplicationRecord
     sorted_players
   end
 
+  def for_collection_select
+    self.roster_players.map do |roster_player|
+      [roster_player.player.name, roster_player.player.id]
+    end
+  end
+
   # accepts_nested_attributes_for :roster_players
 end
