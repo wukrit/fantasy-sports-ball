@@ -27,5 +27,20 @@ class Roster < ApplicationRecord
     end
   end
 
+  def assign_random_players
+    self.roster_players.destroy_all
+    positions = {"QB1" => "QB", "RB1" => "RB", "RB2" => "RB", "WR1" => "WR", "WR2" => "WR", "TE" => "TE", "DEF" => "DEF", "K" => "K"}
+
+    positions.each do |rp, pos|
+      player = Player.filter_by_pos(pos).sample
+      self.roster_players << RosterPlayer.create(player_id: player.id, roster_position: rp)
+    end
+
+    if self.roster_players.count != 8
+      self.assign_random_players
+    end
+
+  end
+
   # accepts_nested_attributes_for :roster_players
 end

@@ -31,12 +31,17 @@ class RostersController < ApplicationController
     end
   end
 
+  def randomize
+    @roster = User.find(session[:user_id]).make_random_roster
+    redirect_to @roster
+  end
+
   def show
 
   end
 
   def edit
-
+    
   end
 
   def update

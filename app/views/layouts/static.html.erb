@@ -7,21 +7,46 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cabin&display=swap" rel="stylesheet">
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body class="splash">
 
     <div class="splash-nav">
-
+      <ul>
+        <li class="logo-li"><img class="logo" alt="Football Logo"></li>
+        <li>Fantasy Sports Ball</li>
+        <li class="right-splash-nav"> <%= link_to "Login", login_path %> </li>
+        <li class="right-splash-nav"><%= link_to "Sign Up", new_user_path %></li>
+      </ul>
     </div>
 
     <div class="splash-focus">
       <div class="focus-text">
-
+        <h1>Welcome to Fantasy Sports Ball</h1>
       </div>
       <div class="splash-form">
+        <% if session[:user_id] %>
+          <h2> Welcome back, <%= link_to User.find(session[:user_id]).username, User.find(session[:user_id]) %>! </h2>
+          <p><%= button_to "Log Out :( ", logout_path, method: :get %></p>
+        <% else %>
+          <h2>Login or Sign Up to Continue</h2>
+          <div class="login">
+            <%= form_tag login_auth_path do %>
 
+                  <%= label_tag :username %><br>
+                  <%= text_field_tag :username %>
+                  <br>
+                  <%= label_tag :password %><br>
+                  <%= password_field_tag :password %>
+                  <br>
+              <%= submit_tag "Log in" %>
+            <% end %>
+            <%= button_to "Sign Up", new_user_path, method: :get %>
+            <%= render "./shared/errors" %>
+          </div>
+        <% end %>
       </div>
     </div>
 
