@@ -8,10 +8,8 @@ class TradesController < ApplicationController
     # byebug
     check_sessions
     if session[:received_player_id] && session[:given_player_id]
-      byebug
-      Trade.create!(given_player_id: session[:given_player_id], received_player_id: session[:received_player_id])
-      clear_session(:given_player_id, :received_player_id, :selected_roster)
-      redirect_to User.find(session[:user_id])
+      trade = Trade.create(given_player_id: session[:given_player_id], received_player_id: session[:received_player_id])
+      check_trade_validity(trade)
     else
       # byebug
       redirect_to new_trade_path
@@ -52,6 +50,16 @@ class TradesController < ApplicationController
       flash[:errors] = "The trade was accepted"
     else
       flash[:errors] = "The trade was declined"
+    end
+  end
+
+  def check_trade_validity(trade)
+    if trade.valid?
+      clear_session(:given_player_id, :received_player_id, :selected_roster)
+      redirect_to User.find(session[:user_id])
+    else
+      flash[:errors] = trade.errors.full_messages.to_sentence
+      redirect_to new_trade_path
     end
   end
 

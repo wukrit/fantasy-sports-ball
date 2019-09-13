@@ -1,5 +1,7 @@
 <h1>Propose Trade With <%= @opponent_roster.user.username %></h1>
 
+<%= render './shared/errors' %>
+
 
 <%= form_for @trade do |f| %>
 
