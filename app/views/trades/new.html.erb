@@ -15,7 +15,7 @@
   <% if session[:selected_roster]  %>
     <br><br>
     <%= f.label :given_player_id, "Player to Trade" %><br>
-    <%= f.collection_select :given_player_id, @own_roster.for_collection_select, 'first', 'second'  %>
+    <%= f.collection_select :given_player_id, Roster.filter_position(session[:received_player_id], @own_roster.for_collection_select), 'first', 'second'  %>
   <% end %>
 
   <br><br>

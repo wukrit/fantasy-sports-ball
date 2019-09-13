@@ -8,9 +8,9 @@ class TradesController < ApplicationController
     # byebug
     check_sessions
     if session[:received_player_id] && session[:given_player_id]
-      Trade.create(given_player_id: session[:given_player_id], received_player_id: session[:received_player_id])
-      clear_session(:given_player_id, :received_player_id)
       byebug
+      Trade.create!(given_player_id: session[:given_player_id], received_player_id: session[:received_player_id])
+      clear_session(:given_player_id, :received_player_id, :selected_roster)
       redirect_to User.find(session[:user_id])
     else
       # byebug
@@ -19,7 +19,10 @@ class TradesController < ApplicationController
   end
 
   def process_trade
-
+    @trade = Trade.find(params[:trade_id])
+    handle_trade_response
+    @trade.destroy
+    redirect_to User.find(session[:user_id])
   end
 
   def destroy
@@ -41,6 +44,15 @@ class TradesController < ApplicationController
     session[:received_player_id] = params[:trade][:received_player_id] if params[:trade][:received_player_id]
     session[:selected_roster] = params[:roster][:selected_roster] if params[:roster][:selected_roster]
     session[:given_player_id] = params[:trade][:given_player_id] if params[:trade][:given_player_id]
+  end
+
+  def handle_trade_response
+    if params[:trade_response] == "accept"
+      @trade.commit_trade
+      flash[:errors] = "The trade was accepted"
+    else
+      flash[:errors] = "The trade was declined"
+    end
   end
 
 end

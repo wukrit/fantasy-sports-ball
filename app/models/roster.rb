@@ -14,7 +14,14 @@ class Roster < ApplicationRecord
 
   def for_collection_select
     self.roster_players.map do |roster_player|
-      [roster_player.player.id, roster_player.player.name]
+      [roster_player.id, "#{roster_player.player.name} | #{roster_player.player.position} "]
+    end
+  end
+
+  def self.filter_position(player_id, collection_selected_roster)
+    given_position = RosterPlayer.find(player_id).player.position
+    collection_selected_roster.select do |player|
+      RosterPlayer.find(player[0]).player.position == given_position
     end
   end
 
