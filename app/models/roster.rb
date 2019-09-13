@@ -39,7 +39,6 @@ class Roster < ApplicationRecord
     if self.roster_players.count != 8
       self.assign_random_players
     end
-
   end
 
   # accepts_nested_attributes_for :roster_players
