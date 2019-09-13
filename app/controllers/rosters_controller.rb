@@ -19,7 +19,7 @@ class RostersController < ApplicationController
       end
       if @roster.roster_players.count != 8
         @roster.destroy
-        flash[:errors] = "Cannot have duplicate players on a roster."
+        flash[:errors] = "Cannot have duplicate players on a roster. " + @roster.errors.full_messages.to_sentence
         redirect_to new_roster_path
       else
         clear_session(:roster_positions)

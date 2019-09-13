@@ -4,9 +4,6 @@
 
 <%= form_for @roster do |f| %>
 
-  <%= f.label :team_name, "Team Name" %>
-  <%= f.text_field :team_name %><br><br>
-
   <%= f.fields_for :roster_player do |l| %>
     <%= l.label :QB1, "QB" %>
     <%= l.collection_select :QB1, @players.where(position: "QB"), :id, :name, {:selected => session[:roster_positions]["QB1"]} %>
@@ -55,6 +52,9 @@
     <%= l.collection_select :K, @players.where(position: "K"), :id, :name, {:selected => session[:roster_positions]["K"]} %>
     <%= link_to "Search for Ks", player_search_path(position_for_roster: "K", position_search: "K") %>
   <% end %><br><br>
+
+  <%= f.label :team_name, "Team Name" %>
+  <%= f.text_field :team_name %><br><br>
 
   <%= f.submit %>
 

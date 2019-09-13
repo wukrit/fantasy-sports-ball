@@ -26,7 +26,7 @@
   <ul>
     <% @user.find_trades.each do |trade| %>
       <li>
-        <%= RosterPlayer.find(trade.given_player_id).roster.user.username %> has offered to trade <%= RosterPlayer.find(trade.given_player_id).player.name %> for <%= RosterPlayer.find(trade.received_player_id).player.name %>. <%= link_to "Accept", process_trade_path(trade_id: trade.id, trade_response: "accept") %> | <%= link_to "Decline", process_trade_path(trade_id: trade.id, trade_response: "why is this line so long?") %>
+        <b><%= RosterPlayer.find(trade.given_player_id).roster.user.username %></b> has offered to trade <b><%= RosterPlayer.find(trade.given_player_id).player.name %></b> for <b><%= RosterPlayer.find(trade.received_player_id).player.name %></b> | <%= link_to "Accept", process_trade_path(trade_id: trade.id, trade_response: "accept") %> | <%= link_to "Decline", process_trade_path(trade_id: trade.id, trade_response: "why is this line so long?") %>
       </li>
     <% end %>
   </ul>

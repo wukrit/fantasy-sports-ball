@@ -3,6 +3,8 @@ class Roster < ApplicationRecord
   has_many :roster_players, dependent: :destroy
   has_many :players, through: :roster_players
 
+  validates :team_name, presence: true
+
   def sorted_players
     order = ["QB1", "RB1", "RB2", "WR1", "WR2", "TE", "DEF", "K"]
     sorted_players = []
