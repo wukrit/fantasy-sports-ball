@@ -41,11 +41,16 @@ class RostersController < ApplicationController
   end
 
   def edit
-    
+
   end
 
   def update
-
+    if @roster.update(roster_params(:team_name))
+      redirect_to @roster
+    else
+      flash[:errors] = @roster.errors.full_messages.to_sentence
+      redirect_to edit_roster_path(@roster)
+    end
   end
 
   def destroy
