@@ -14,6 +14,7 @@
  *= require_self
  */
 
+
 /* SiteWide Font */
 * {
   font-family: 'IBM Plex Sans', sans-serif;
@@ -87,4 +88,17 @@ body {
 /* Dropdowns */
 select {
   width: 10vw;
+}
+
+/* Splash Page Styling */
+
+.splash{
+  height: 100vh;
+  overflow: hidden;
+  background-color: #000;
+  background: url(splash_bg.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
