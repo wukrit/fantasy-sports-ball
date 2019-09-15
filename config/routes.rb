@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get '/rosters/player_search', to: 'rosters#player_search', as: 'player_search'
   get '/rosters/search_clear', to: 'rosters#search_clear', as: 'search_clear'
   get '/rosters/add_player', to: 'rosters#add_player', as: 'add_player'
+  get '/rosters/randomize', to: 'rosters#randomize', as: 'randomize'
 
   get '/trades/process_trade', to: 'trades#process_trade', as: 'process_trade'
 

@@ -2,60 +2,80 @@
 
 <%= render "./shared/errors" %>
 
+<%= button_to "Create Random Roster", randomize_path, method: :get %>
+
+<table>
 <%= form_for @roster do |f| %>
 
-  <%= f.label :team_name, "Team Name" %>
-  <%= f.text_field :team_name %><br><br>
-
+  <tr>
   <%= f.fields_for :roster_player do |l| %>
-    <%= l.label :QB1, "QB" %>
-    <%= l.collection_select :QB1, @players.where(position: "QB"), :id, :name, {:selected => session[:roster_positions]["QB1"]} %>
-    <%= link_to "Search for QBs", player_search_path(position_for_roster: "QB1", position_search: "QB") %>
+    <td><%= l.label :QB1, "Quarterback" %></td>
+    <td><%= l.collection_select :QB1, @players.where(position: "QB"), :id, :name, {:selected => session[:roster_positions]["QB1"]} %></td>
+    <td><%= link_to "Search for QBs", player_search_path(position_for_roster: "QB1", position_search: "QB") %></td>
   <% end %>
-  <br>
+  </tr>
 
+  <tr>
   <%= f.fields_for :roster_player do |l| %>
-    <%= l.label :RB1, "RB" %>
-    <%= l.collection_select :RB1, @players.where(position: "RB"), :id, :name, {:selected => session[:roster_positions]["RB1"]} %>
-    <%= link_to "Search for RBs", player_search_path(position_for_roster: "RB1", position_search: "RB") %>
-  <% end %><br>
+    <td><%= l.label :RB1, "Running Back" %></td>
+    <td><%= l.collection_select :RB1, @players.where(position: "RB"), :id, :name, {:selected => session[:roster_positions]["RB1"]} %></td>
+    <td><%= link_to "Search for RBs", player_search_path(position_for_roster: "RB1", position_search: "RB") %></td>
+  <% end %>
+  </tr>
 
+  <tr>
   <%= f.fields_for :roster_player do |l| %>
-    <%= l.label :RB2, "RB" %>
-    <%= l.collection_select :RB2, @players.where(position: "RB"), :id, :name, {:selected => session[:roster_positions]["RB2"]} %>
-    <%= link_to "Search for RBs", player_search_path(position_for_roster: "RB2", position_search: "RB") %>
-  <% end %><br>
+    <td><%= l.label :RB2, "Running Back" %></td>
+    <td><%= l.collection_select :RB2, @players.where(position: "RB"), :id, :name, {:selected => session[:roster_positions]["RB2"]} %></td>
+    <td><%= link_to "Search for RBs", player_search_path(position_for_roster: "RB2", position_search: "RB") %></td>
+  <% end %>
+  </tr>
 
+  <tr>
   <%= f.fields_for :roster_player do |l| %>
-    <%= l.label :WR1, "WR" %>
-    <%= l.collection_select :WR1, @players.where(position: "WR"), :id, :name, {:selected => session[:roster_positions]["WR1"]} %>
-    <%= link_to "Search for WRs", player_search_path(position_for_roster: "WR1", position_search: "WR") %>
-  <% end %><br>
+    <td><%= l.label :WR1, "Wide Receiver" %></td>
+    <td><%= l.collection_select :WR1, @players.where(position: "WR"), :id, :name, {:selected => session[:roster_positions]["WR1"]} %></td>
+    <td><%= link_to "Search for WRs", player_search_path(position_for_roster: "WR1", position_search: "WR") %></td>
+  <% end %>
+  </tr>
 
+  <tr>
   <%= f.fields_for :roster_player do |l| %>
-    <%= l.label :WR2, "WR" %>
-    <%= l.collection_select :WR2, @players.where(position: "WR"), :id, :name, {:selected => session[:roster_positions]["WR2"]} %>
-    <%= link_to "Search for WRs", player_search_path(position_for_roster: "WR2", position_search: "WR") %>
-  <% end %><br>
+    <td><%= l.label :WR2, "Wide Receiver" %></td>
+    <td><%= l.collection_select :WR2, @players.where(position: "WR"), :id, :name, {:selected => session[:roster_positions]["WR2"]} %></td>
+    <td><%= link_to "Search for WRs", player_search_path(position_for_roster: "WR2", position_search: "WR") %></td>
+  <% end %>
+  </tr>
 
+  <tr>
   <%= f.fields_for :roster_player do |l| %>
-    <%= l.label :TE, "TE" %>
-    <%= l.collection_select :TE, @players.where(position: "TE"), :id, :name, {:selected => session[:roster_positions]["TE"]} %>
-    <%= link_to "Search for TEs", player_search_path(position_for_roster: "TE", position_search: "TE") %>
-  <% end %><br>
+    <td><%= l.label :TE, "Tight End" %></td>
+    <td><%= l.collection_select :TE, @players.where(position: "TE"), :id, :name, {:selected => session[:roster_positions]["TE"]} %></td>
+    <td><%= link_to "Search for TEs", player_search_path(position_for_roster: "TE", position_search: "TE") %></td>
+  <% end %>
+  </tr>
 
+  <tr>
   <%= f.fields_for :roster_player do |l| %>
-    <%= l.label :DEF, "DEF" %>
-    <%= l.collection_select :DEF, @players.where(position: "DEF"), :id, :name, {:selected => session[:roster_positions]["DEF"]} %>
-    <%= link_to "Search for DEFs", player_search_path(position_for_roster: "DEF", position_search: "DEF") %>
-  <% end %><br>
+    <td><%= l.label :DEF, "Defense" %></td>
+    <td><%= l.collection_select :DEF, @players.where(position: "DEF"), :id, :name, {:selected => session[:roster_positions]["DEF"]} %></td>
+    <td><%= link_to "Search for DEFs", player_search_path(position_for_roster: "DEF", position_search: "DEF") %></td>
+  <% end %>
+  </tr>
 
+  <tr>
   <%= f.fields_for :roster_player do |l| %>
-    <%= l.label :K, "K" %>
-    <%= l.collection_select :K, @players.where(position: "K"), :id, :name, {:selected => session[:roster_positions]["K"]} %>
-    <%= link_to "Search for Ks", player_search_path(position_for_roster: "K", position_search: "K") %>
-  <% end %><br><br>
+    <td><%= l.label :K, "Kicker" %></td>
+    <td><%= l.collection_select :K, @players.where(position: "K"), :id, :name, {:selected => session[:roster_positions]["K"]} %></td>
+    <td><%= link_to "Search for Ks", player_search_path(position_for_roster: "K", position_search: "K") %></td></td>
+  <% end %>
+  </tr>
+  <tr>
+    <td><%= f.label :team_name, "Team Name" %></td>
+    <td><%= f.text_field :team_name %></td>
+  </tr>
 
-  <%= f.submit %>
+  <tr><td><%= f.submit %></td></tr>
 
 <% end %>
+</table>

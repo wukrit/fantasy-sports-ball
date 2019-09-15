@@ -1,0 +1,10 @@
+<h1>Change <%= @roster.team_name %>'s Name</h1>
+
+<%= render "./shared/errors" %>
+
+<%= form_for @roster do |f| %>
+  <%= f.label :team_name, "Team Name" %><br>
+  <%= f.text_field :team_name %>
+  <br>
+  <%= f.submit %>
+<% end %>

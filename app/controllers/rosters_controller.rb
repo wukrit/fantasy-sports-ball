@@ -19,7 +19,7 @@ class RostersController < ApplicationController
       end
       if @roster.roster_players.count != 8
         @roster.destroy
-        flash[:errors] = "Cannot have duplicate players on a roster."
+        flash[:errors] = "Cannot have duplicate players on a roster. " + @roster.errors.full_messages.to_sentence
         redirect_to new_roster_path
       else
         clear_session(:roster_positions)
@@ -31,6 +31,11 @@ class RostersController < ApplicationController
     end
   end
 
+  def randomize
+    @roster = User.find(session[:user_id]).make_random_roster
+    redirect_to @roster
+  end
+
   def show
 
   end
@@ -40,7 +45,12 @@ class RostersController < ApplicationController
   end
 
   def update
-
+    if @roster.update(roster_params(:team_name))
+      redirect_to @roster
+    else
+      flash[:errors] = @roster.errors.full_messages.to_sentence
+      redirect_to edit_roster_path(@roster)
+    end
   end
 
   def destroy

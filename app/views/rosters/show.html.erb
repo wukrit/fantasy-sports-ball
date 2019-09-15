@@ -1,8 +1,12 @@
 <h1><%= @roster.team_name %></h1>
 
+<% if session[:user_id] == @roster.user.id %>
+  <%= button_to "Change Roster Name", edit_roster_path(@roster), method: :get %>
+<% end %>
+
 <ul>
   <% @roster.sorted_players.each do |roster_player| %>
-    <li>
+    <li class="roster">
       <%= link_to "#{roster_player.roster_position} | #{roster_player.player.name}", roster_player.player %>
     </li>
   <% end %>

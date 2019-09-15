@@ -18,4 +18,12 @@ class User < ApplicationRecord
     trades
   end
 
+  def make_random_roster
+    roster = Roster.create(user_id: self.id, team_name: "#{self.username}'s Random Roster")
+    roster.update(team_name: "#{roster.team_name} #{roster.id}")
+
+    roster.assign_random_players
+    roster
+  end
+
 end
