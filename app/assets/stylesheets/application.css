@@ -24,7 +24,7 @@
 body {
   height: 100vh;
   background-color: #000;
-  background: image-url("splash_bg.jpg") no-repeat center center fixed;
+  background: url("splash_bg.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -110,7 +110,7 @@ select {
 .splash-nav .logo {
   float:left;
   display: inline-block;
-  content: image-url("foozball_icon.png");
+  content: url("foozball_icon.png");
   width: inherit;
   height: inherit;
 }
